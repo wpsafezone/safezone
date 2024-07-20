@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 16 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #000;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #0f62af;
+      }
+
+      .cls-4 {
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        fill: #20adee;
+      }
+
+      .cls-5 {
+        display: none;
+      }
+    </style>
+  </defs>
+  <g id="katman_1" data-name="katman 1" class="cls-5">
+    <image class="cls-4" width="671" height="122" transform="translate(-227.9 70.6) scale(0)" xlink:href="favicon-1.png"/>
+  </g>
+  <g id="katman_2" data-name="katman 2">
+    <path class="cls-3" d="M8,6.6s2.6-2,2.8-2.1c.2-.1.2,0,.2,0v.6l2.6-1.7V0l-5.6,3.8"/>
+    <path class="cls-2" d="M8,3.8L2.4,0v3.4s2.6,1.7,2.6,1.7v-.6s0-.1.2,0,2.8,2.1,2.8,2.1"/>
+    <polyline class="cls-3" points="8 11.2 13.6 7.2 13.6 11.9 16 10.2 16 2.9 8 8.4"/>
+    <polyline class="cls-2" points="8 8.4 0 2.9 0 10.1 2.4 11.9 2.4 7.2 8 11.2"/>
+    <polyline class="cls-2" points="8 16 4.4 13.3 4.4 10.7 8 13.3"/>
+    <polyline class="cls-3" points="8 13.3 11.6 10.7 11.6 13.3 8 16"/>
+    <path class="cls-1" d="M5.2,4.5"/>
+  </g>
+</svg>

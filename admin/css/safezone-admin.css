@@ -1,0 +1,66 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+
+.safezone-pro-redirect {
+    color: orange !important;
+    font-weight: bold;
+}
+
+.safezone-loader {
+    position: relative;
+}
+
+.loading {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: -5px;
+    left: -20px;
+}
+
+#code-area {
+    width:100%;
+    height:400px;
+    margin:auto;
+}
+
+.autoscanning_checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.xdsoft_datetimepicker .xdsoft_label>.xdsoft_select>div>.xdsoft_option.xdsoft_current, .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default, .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box>div>div.xdsoft_current {
+    background: #3582c4 !important;
+    box-shadow: none !important;
+    color: #fff;
+    font-weight: 700;
+}
+
+.xdsoft_datetimepicker .xdsoft_calendar td:hover, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box>div>div:hover {
+    color: #fff !important;
+    background: #3582c4 !important;
+    box-shadow: none !important;
+}
+
+.xdsoft_datetimepicker .xdsoft_label>.xdsoft_select>div>.xdsoft_option:hover {
+    color: #fff;
+    background: #3582c4 !important;
+}
+
+.malware-period-area {
+    margin-left:36px;
+    align-items: center;
+    gap: 20px;
+}
+
+.malware-period-area.malware-period-area-hidden {
+    display: none !important;
+}
+
+.malware-period-area.malware-period-area-show {
+    display: flex  !important;
+}

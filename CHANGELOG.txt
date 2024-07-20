@@ -1,0 +1,21 @@
+Version 1.0.5
+Date: June 8, 2024
+- Happy birthday.
+
+Version 1.0.3
+Date: June 30, 2024
+- Added a comprehensive security dashboard for quick overview and management.
+- Implemented IP whitelisting feature for secure access control.
+- Ensured full compatibility with the latest WordPress version.
+
+Version 1.0.2
+Date: June 20, 2024
+- Added a comprehensive security dashboard for quick overview and management.
+- Implemented IP whitelisting feature for secure access control.
+
+Version 1.0.1
+Date: June 10, 2024
+- Added a comprehensive security dashboard for quick overview and management.
+- Implemented IP whitelisting feature for secure access control.
+- Ensured full compatibility with the latest WordPress version.
+- Launched WP Safe Zone, the ultimate security plugin for WordPress.

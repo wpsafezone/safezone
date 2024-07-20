@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 78.8 85.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #9ca1a8;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        display: none;
+        fill: #1d2327;
+      }
+
+      .cls-3 {
+        fill: #000;
+      }
+    </style>
+  </defs>
+  <g id="katman_1" data-name="katman 1">
+    <rect class="cls-2" x="-2.4" width="83.9" height="87"/>
+    <image width="671" height="122" transform="translate(-196.5 100.4) scale(.8)" xlink:href="icon-1.png"/>
+    <text/>
+    <text/>
+  </g>
+  <g id="katman_2" data-name="katman 2">
+    <path class="cls-1" d="M39.4,35.2s13-10.6,13.9-11.2.8,0,.8,0v3l12.7-9V0l-27.4,20.2"/>
+    <path class="cls-1" d="M39.4,20.2L12,0v18s12.7,9,12.7,9v-3s0-.7.8,0l13.9,11.2"/>
+    <polyline class="cls-1" points="39.4 60 66.7 38.3 66.7 63.7 78.8 54.7 78.8 15.7 39.4 45"/>
+    <polyline class="cls-1" points="39.4 45 0 15.7 0 54 12 63.7 12 38.2 39.4 60"/>
+    <polyline class="cls-1" points="39.4 85.5 21.8 71.2 21.8 57 39.4 71.2"/>
+    <polyline class="cls-1" points="39.4 71.2 57 57 57 71.2 39.4 85.5"/>
+    <path class="cls-3" d="M25.5,24"/>
+  </g>
+</svg>
