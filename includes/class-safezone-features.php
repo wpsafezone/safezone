@@ -465,14 +465,14 @@ if ( ! class_exists( 'Safezone_Features' ) ) {
 							$this->add_firewall_report( $data );
 							wp_redirect( 'https://www.google.com' );
 						}
-						if ( $data['firewall_type'] === 'Bad Bots' && get_option( 'sz_block_bad_bots' ) === '1' ) {
-							$this->add_firewall_report( $data );
-							wp_redirect( 'https://www.google.com' );
-						}
-						if ( $data['firewall_type'] === 'Bad Referer' && get_option( 'sz_block_bad_referer' ) === '1' ) {
-							$this->add_firewall_report( $data );
-							wp_redirect( 'https://www.google.com' );
-						}
+//						if ( $data['firewall_type'] === 'Bad Bots' && get_option( 'sz_block_bad_bots' ) === '1' ) {
+//							$this->add_firewall_report( $data );
+//							wp_redirect( 'https://www.google.com' );
+//						}
+//						if ( $data['firewall_type'] === 'Bad Referer' && get_option( 'sz_block_bad_referer' ) === '1' ) {
+//							$this->add_firewall_report( $data );
+//							wp_redirect( 'https://www.google.com' );
+//						}
 					}
 				}
 			}
