@@ -30,7 +30,7 @@ WP Safe Zone is a comprehensive security plugin designed to protect your WordPre
 
 # Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/wp-safe-zone` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/safezone` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Configure the plugin settings from the WP Safe Zone menu in the WordPress admin panel.
 4. Read our Docs for better configurations (https://support.wpsafezone.com/docs/wp-safe-zone/)
