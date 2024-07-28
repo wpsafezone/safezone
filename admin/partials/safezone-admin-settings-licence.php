@@ -84,7 +84,7 @@ if ( ! defined( 'WPINC' ) ) {
                     <div class="license-panel__details">
                         <div class="license-panel__detail">
                             <div class="license-panel__detail-title">License Key</div>
-                            <div class="license-panel__detail-value"><mark><?php echo esc_html($this->license_info['license_key']);?></mark></div>
+                            <div class="license-panel__detail-value"><mark><?php echo esc_html(str_repeat('*', strlen($this->license_info['license_key']) - 6) . substr($this->license_info['license_key'], -6));?></mark></div>
                         </div>
                         <div class="license-panel__detail">
                             <div class="license-panel__detail-title">Product</div>
@@ -96,11 +96,11 @@ if ( ! defined( 'WPINC' ) ) {
                         </div>
                         <div class="license-panel__detail">
                             <div class="license-panel__detail-title">Start Date</div>
-                            <div class="license-panel__detail-value"><?php echo esc_html($this->license_info['created_at']);?></div>
+                            <div class="license-panel__detail-value"><?php echo esc_html(date('Y-m-d H:i', strtotime($this->license_info['created_at'])));?></div>
                         </div>
                         <div class="license-panel__detail">
                             <div class="license-panel__detail-title">Expiry Date</div>
-                            <div class="license-panel__detail-value"><?php echo esc_html($this->license_info['expires_at']);?></div>
+                            <div class="license-panel__detail-value"><?php echo esc_html(date('Y-m-d H:i', strtotime($this->license_info['expires_at'])));?></div>
                         </div>
                         <div class="license-panel__detail">
                             <div class="license-panel__detail-title">Installs</div>

@@ -428,7 +428,7 @@ class Safezone_Admin
         $this->malware_score = $roundedScore == 0 ? 5 : $roundedScore;
 
         $stepsData = [
-            '1' => 'Spamvertising Check',
+            '1' => 'Core Files',
             '2' => 'Blacklist Check',
             '3' => 'Spam Check',
             '4' => 'Vulnerability Scan',
@@ -1461,7 +1461,11 @@ class Safezone_Admin
             'gd-config.php',
             'gd-preload-cli.php',
             'install.php',
-            'wp-config-sample.php'
+            'wp-config-sample.php',
+            'error_log',
+            '.litespeed_flag',
+            'default.php',
+            'favicon.ico'
         ];
 
         $iterator1 = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir1), RecursiveIteratorIterator::SELF_FIRST);

@@ -974,14 +974,16 @@
                     board.html(lines);
                     if (settings.length > 2) {
                         settings_board.html(settings_status_text('error', 'Update Required'));
+                        $('.splash-screen').removeClass('show')
                     } else {
-                        settings_board.html(settings_status_text('warning', 'Update Required'))
+                        settings_board.html(settings_status_text('warning', 'Update Required'));
+                        $('.splash-screen').removeClass('show')
                     }
                 } else {
                     board.html('')
                     settings_board.html(settings_status_text('success', 'Protected'));
+                    $('.splash-screen').removeClass('show')
                 }
-                $('.splash-screen').removeClass('show')
             });
         }
     }
