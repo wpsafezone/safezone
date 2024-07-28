@@ -50,7 +50,12 @@
 												<?php echo $value['is_pro'] ? '<span class="settings-form__item-badge">'.esc_html('pro').'</span>' : '' ?>
                                                 <?php endif; ?>
                                             </div>
-                                            <div class="settings-form__item-description"><?php echo esc_html($value['description']); ?></div>
+                                            <div class="settings-form__item-description">
+                                                <?php echo esc_html($value['description']); ?>
+                                                <?php if($value['doc_url'] !== ""): ?>
+                                                    <a href="<?php echo esc_url($value['doc_url']); ?>" target="_blank">(Read on Docs)</a>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                         <label class="form-switch">
                                             <input <?php echo esc_attr($disabled); ?> class="form-check-input update_option" data-key="<?php echo esc_attr($value['key']); ?>" type="<?php echo esc_attr($value['type']); ?>" role="switch" name="<?php echo esc_attr($value['key']); ?>" <?php echo get_option( $value['key'] ) === "0" ? '' : 'checked="checked"' ?>>

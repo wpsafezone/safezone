@@ -1,21 +1,41 @@
-Version 1.0.5
-Date: June 8, 2024
-- Happy birthday.
+Version 1.0.0
+Date: July 25, 2024
+- All bugs have been fixed.
+- Major version released
 
-Version 1.0.3
-Date: June 30, 2024
+Version 0.6.0-beta
+Date: July 25, 2024
+- Manually review and analyze malicious code.
+- Modal pop-ups and dynamism improvements.
+- Broken or Malicious WordPress Core files can be fixed.
+- API and requests are compressed, ensuring connection latency is at the lowest level on Malware Scan stages.
+- More security options for the user in Firewall Settings.
+
+Version 0.5.0-beta
+Date: July 25, 2024
+- Improved the Pro license purchasing experience via the plugin.
+- More insight and analysis for malicious traffic in Firewall.
+- Malware scanning process has been strengthened with 7 different stages
+- Ensured full compatibility with the latest WordPress version.
+
+Version 0.4.0-beta
+Date: July 25, 2024
 - Added a comprehensive security dashboard for quick overview and management.
 - Implemented IP whitelisting feature for secure access control.
 - Ensured full compatibility with the latest WordPress version.
 
-Version 1.0.2
-Date: June 20, 2024
-- Added a comprehensive security dashboard for quick overview and management.
-- Implemented IP whitelisting feature for secure access control.
+Version 0.3.0-beta
+Date: July 25, 2024
+- Enhanced DDoS protection mechanisms to thwart unauthorized attempts.
+- Implemented regular updates to malware signatures for real-time scanning.
 
-Version 1.0.1
-Date: June 10, 2024
-- Added a comprehensive security dashboard for quick overview and management.
-- Implemented IP whitelisting feature for secure access control.
-- Ensured full compatibility with the latest WordPress version.
-- Launched WP Safe Zone, the ultimate security plugin for WordPress.
+Version 0.2.0-beta
+Date: July 25, 2024
+- Core features include Firewall Protection and Malware Scanner.
+- Strengthened malware detection capabilities for proactive security.
+- Integrated security alerts and recommendations for proactive site protection.
+
+Version 0.1.0-beta
+Date: July 25, 2024
+- Initial beta release
+- Launched Safe Zone, the ultime security plugin for Wordpress.

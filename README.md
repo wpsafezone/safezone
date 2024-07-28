@@ -28,6 +28,11 @@ WP Safe Zone is a comprehensive security plugin designed to protect your WordPre
 - IP Whitelisting and Blacklisting: Whitelist trusted IP addresses and blacklist malicious ones to enhance your site's security.
 - Additional Features: Additional security features to further enhance your site's protection. (https://wpsafezone.com/features/additional-features/)
 
+
+### Warning
+There is a PHP feature that you need to check for Safe Zone to work 100% successfully. You may need to check whether the ZIP extension is selected by entering the PHP Selector field in your server/hosting panel. If the tick is not selected, you must activate it by selecting it. Some servers/hostings keep this feature turned off as standard and manual action may be required. To see how and get support, you can visit here: [https://support.wpsafezone.com/docs/wp-safe-zone/getting-started/]	
+
+
 # Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/safezone` directory, or install the plugin through the WordPress plugins screen directly.
@@ -72,6 +77,10 @@ We have developed an easy-to-use interface by trying to make everything as easy 
 
 # Changelog
 
+**1.0.0**
+* All bugs have been fixed.
+* Major version released
+
 **0.6.0-beta**
 * Manually review and analyze malicious code.
 * Modal pop-ups and dynamism improvements.
@@ -101,4 +110,4 @@ We have developed an easy-to-use interface by trying to make everything as easy 
 
 **0.1.0-beta**
 * Initial beta release
-* Launched WP Safe Zone, the ultime security plugin for Wordpress.
+* Launched Safe Zone, the ultime security plugin for Wordpress.

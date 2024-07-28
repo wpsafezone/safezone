@@ -15,10 +15,11 @@
  * @wordpress-plugin
  * Plugin Name:       Safe Zone
  * Plugin URI:        https://wpsafezone.com
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Safe Zone protects your WordPress site against malware and attacks using advanced AI technology. With real-time protection, an advanced firewall, and AI-powered malware scanning, it keeps your site secure. Easy to install and user-friendly, safeguarding your site has never been simpler!
  * Version:           1.0.0
- * Author:            Brunos Digital
- * Author URI:        https://brunos.digital/
+ * Author:            Safe Zone
+ * Author URI:        https://wpsafezone.com
+ * Tags:              security, malware scanner, firewall, brute force, protection, security plugin, security scan, security scanner, security scan plugin, security scan tool, security scan wordpress, security scan wp, security scanner plugin, security scanner tool, security scanner wordpress, security scanner wp, security tool, security wordpress, security wp, site security, website security, wordpress security, wp security
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       safezone
@@ -151,7 +152,7 @@ const VALID_TABS = ['firewall', 'malware', 'anti-spam', 'notifications', 'change
 const WPKSES = [
 	'li'     => [ 'class' => [] ],
 	'span'   => [ 'class' => [], 'id' => [] ],
-	'a'      => [ 'class' => [], 'href' => [], 'id' => [] ],
+	'a'      => [ 'class' => [], 'href' => [], 'id' => [], 'target' => [] ],
 	'button' => [ 'class' => [], 'href' => [], 'id' => [] ],
 	'ul'     => [ 'class' => [] ],
 	'div'    => [ 'class' => [], 'id' => [], 'data-type' => [], 'style' => [] ],
@@ -200,7 +201,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'notifications',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/main-features/uptime-monitoring/'
     ],
     [
         'key' => 'sz_weekly_reports',
@@ -210,7 +212,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'notifications',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_update_notifications',
@@ -220,7 +223,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'notifications',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_license',
@@ -230,7 +234,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '',
         'group' => '',
         'is_pro' => false,
-        'listed' => false
+        'listed' => false,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_firewall',
@@ -240,7 +245,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => false,
-        'listed' => false
+        'listed' => false,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_anti_spam',
@@ -251,31 +257,34 @@ const SAFEZONE_SETTINGS = [
         'group' => 'anti-spam',
         'is_pro' => false,
         'listed' => false,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_login_protection',
         'title' => 'Login Protection',
-        'description' => 'Protects the login page from brute force attacks. (Read on Docs)',
+        'description' => 'Protects the login page from brute force attacks.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/login-protection/'
     ],
     [
         'key' => 'sz_block_blacklisted_ips',
         'title' => 'Block Blacklisted IP\'s',
-        'description' => 'Block IP addresses that are known to be malicious. (Read on Docs)',
+        'description' => 'Block IP addresses that are known to be malicious.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/block-blacklisted-ips/'
     ],
 //    [
 //        'key' => 'sz_block_bad_bots',
 //        'title' => 'Block Bad Bots',
-//        'description' => 'Block bad bots that are known to cause problems for websites. (Read on Docs)',
+//        'description' => 'Block bad bots that are known to cause problems for websites.',
 //        'type' => 'checkbox',
 //        'default' => '0',
 //        'group' => 'firewall',
@@ -285,7 +294,7 @@ const SAFEZONE_SETTINGS = [
 //    [
 //        'key' => 'sz_preventing_unwanted_attempts',
 //        'title' => 'Preventing Unwanted Attempts',
-//        'description' => 'Prevents unwanted attempts to access the site. (Read on Docs)',
+//        'description' => 'Prevents unwanted attempts to access the site.',
 //        'type' => 'checkbox',
 //        'default' => '0',
 //        'group' => 'firewall',
@@ -295,32 +304,35 @@ const SAFEZONE_SETTINGS = [
     [
         'key' => 'sz_xss_check',
         'title' => 'XSS Check',
-        'description' => 'Cross-site scripting attacks are one of the more common types of website attacks. (Read on Docs)',
+        'description' => 'Cross-site scripting attacks are one of the more common types of website attacks.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/xss-check/'
     ],
     [
         'key' => 'sz_disable_embeds',
         'title' => 'Disable Embeds',
-        'description' => 'If you don’t need the oEmbed feature for the site, you can disable the feature to improve the site’s load time. (Read on Docs)',
+        'description' => 'If you don’t need the oEmbed feature for the site, you can disable the feature to improve the site’s load time.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/disable-embeds/'
     ],
     [
         'key' => 'sz_disable_xml',
         'title' => 'Disable XML-RPC',
-        'description' => 'The file, which can be helpful for certain functions, can also pose security risks if not managed correctly. (Read on Docs)',
+        'description' => 'The file, which can be helpful for certain functions, can also pose security risks if not managed correctly.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/disable-xml-rpc/'
     ],
     [
         'key' => 'sz_hide_wp_version',
@@ -330,17 +342,19 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_disable_self_pingbacks',
         'title' => 'Disable Self Pingbacks',
-        'description' => 'Self Pingbacks are nothing but a waste of resources. (Read on Docs)',
+        'description' => 'Self Pingbacks are nothing but a waste of resources.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/disable-self-pingbacks/'
     ],
     [
         'key' => 'sz_disable_rest_api',
@@ -350,7 +364,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/firewall-settings/restrict-access-rest-api/'
     ],
     [
         'key' => 'sz_ignore_logged',
@@ -360,7 +375,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'firewall',
         'is_pro' => true,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_disable_comments',
@@ -370,27 +386,30 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'anti-spam',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_disable_heartbeat',
         'title' => 'Disable Heartbeat',
-        'description' => 'WordPress Heartbeat should be disabled (or limited) since it increases CPU usage. (Read on Docs)',
+        'description' => 'WordPress Heartbeat should be disabled (or limited) since it increases CPU usage.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'anti-spam',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/anti-spam-settings/disable-heartbeat/'
     ],
     [
         'key' => 'sz_remove_rsd_link',
         'title' => 'Remove RSD Link',
-        'description' => 'RSD/WLW are used if you plan on using Windows Live Writer to write to your wordpress site. (Read on Docs)',
+        'description' => 'RSD/WLW are used if you plan on using Windows Live Writer to write to your wordpress site.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'anti-spam',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/anti-spam-settings/remove-rsd-wlw-links/'
     ],
     [
         'key' => 'sz_remove_shortlink',
@@ -400,17 +419,19 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'anti-spam',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_disable_rss_feeds',
         'title' => 'Disable RSS Feeds',
-        'description' => 'By default WordPress creates all kinds of RSS feeds built-in. (Read on Docs)',
+        'description' => 'By default WordPress creates all kinds of RSS feeds built-in.',
         'type' => 'checkbox',
         'default' => '0',
         'group' => 'anti-spam',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/anti-spam-settings/disable-rss-feed/'
     ],
     [
         'key' => 'sz_enable_autoscanning',
@@ -420,7 +441,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/malware-scanner-settings/auto-scanning-ezd_ampersand-schedule/'
     ],
     [
         'key' => 'sz_autoscanning_period',
@@ -430,7 +452,8 @@ const SAFEZONE_SETTINGS = [
         'default' => 'monthly',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => false
+        'listed' => false,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_autoscanning_date',
@@ -440,7 +463,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => false
+        'listed' => false,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_importing_file_monitoring',
@@ -450,7 +474,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/malware-scanner-settings/important-file-monitoring/'
     ],
     [
         'key' => 'sz_scan_html_code',
@@ -460,7 +485,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/malware-scanner-settings/scan-html-code/'
     ],
     [
         'key' => 'sz_heuristic_analysis',
@@ -470,7 +496,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/malware-scanner-settings/heuristic-analysis/'
     ],
     [
         'key' => 'sz_check_plugin',
@@ -480,7 +507,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ],
     [
         'key' => 'sz_check_theme',
@@ -490,7 +518,8 @@ const SAFEZONE_SETTINGS = [
         'default' => '0',
         'group' => 'malware',
         'is_pro' => false,
-        'listed' => true
+        'listed' => true,
+        'doc_url' => ''
     ]
 ];
 
@@ -710,16 +739,28 @@ const COUNTRIES = [
 
 const DOCUMENTATION = [
     [
-        'name' => 'Quick Start Guide',
-        'url' => CLIENT_URL . '/docs-category/getting-started'
+        'name' => 'Getting Started',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/getting-started/'
     ],
     [
-        'name' => 'Configuration Manual',
-        'url' => CLIENT_URL . '/docs-category/features'
+        'name' => 'Quick Settings',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/getting-started/quick-settings/'
     ],
     [
-        'name' => 'Update Instructions',
-        'url' => CLIENT_URL . '/docs-category/additional-settings'
+        'name' => 'User Guide',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/user-guide/'
+    ],
+    [
+        'name' => 'Main Features',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/main-features/'
+    ],
+    [
+        'name' => 'License Activation',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/getting-started/license-activation/'
+    ],
+    [
+        'name' => 'View All Docs',
+        'url' => 'https://support.wpsafezone.com/docs/wp-safe-zone/'
     ]
 ];
 

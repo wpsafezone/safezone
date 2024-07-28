@@ -13,7 +13,7 @@ if ( ! defined( 'WPINC' ) ) {
             <svg class="icon">
                 <use xlink:href="<?php echo esc_url( SAFEZONE_PLUGIN_URL . '/admin/images/icons.svg#book-2' ); ?>"></use>
             </svg>
-            WP Safe Zone Documentation
+            Safe Zone Documentation
         </div>
         <div class="sz-card-documentations__list">
 			<?php
