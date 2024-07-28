@@ -157,7 +157,7 @@ const WPKSES = [
 	'ul'     => [ 'class' => [] ],
 	'div'    => [ 'class' => [], 'id' => [], 'data-type' => [], 'style' => [] ],
 	'b'      => [ 'class' => [] ],
-	'strong' => [ 'class' => [] ],
+	'strong' => [ 'class' => [], 'id' => [] ],
 	'label'  => [ 'class' => [] ],
 	'table'  => [ 'class' => [], 'id' => [] ],
 	'thead'  => [ 'class' => [] ],

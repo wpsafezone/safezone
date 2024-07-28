@@ -99,27 +99,23 @@ if ( ! defined( 'WPINC' ) ) {
                                     </svg>
 
                                 </div>
+                                <div class="paywall-detail__item-title">AI Security Engine</div>
+                            </div>
+                            <div class="paywall-detail__item-text">Powered by artificial intelligence (AI), Safe Zone offers advanced security features to keep your site safe from malware, hacking attempts, and other online threats.</div>
+                        </div>
+
+                        <div class="paywall-detail__item">
+                            <div class="paywall-detail__item-heading">
+                                <div class="paywall-detail__item-icon">
+
+                                    <svg class="icon">
+                                        <use xlink:href="<?php echo esc_url( SAFEZONE_PLUGIN_URL . 'admin/images/icons.svg#yes-alt' ); ?>"></use>
+                                    </svg>
+
+                                </div>
                                 <div class="paywall-detail__item-title">Live Firewall</div>
                             </div>
-                            <div class="paywall-detail__item-text">Fortify your defenses with our Live Firewall,
-                                actively safeguarding your website from evolving threats.
-                            </div>
-                        </div>
-
-                        <div class="paywall-detail__item">
-                            <div class="paywall-detail__item-heading">
-                                <div class="paywall-detail__item-icon">
-
-                                    <svg class="icon">
-                                        <use xlink:href="<?php echo esc_url( SAFEZONE_PLUGIN_URL . 'admin/images/icons.svg#yes-alt' ); ?>"></use>
-                                    </svg>
-
-                                </div>
-                                <div class="paywall-detail__item-title">Malware Scanner</div>
-                            </div>
-                            <div class="paywall-detail__item-text">Detect and eliminate threats with our
-                                state-of-the-art Malware Scanner, keeping your WordPress site secure.
-                            </div>
+                            <div class="paywall-detail__item-text">Fortify your defenses with our Live Firewall, actively safeguarding your website from evolving threats.</div>
                         </div>
 
                         <div class="paywall-detail__item">
@@ -129,11 +125,13 @@ if ( ! defined( 'WPINC' ) ) {
                                         <use xlink:href="<?php echo esc_url( SAFEZONE_PLUGIN_URL . 'admin/images/icons.svg#yes-alt' ); ?>"></use>
                                     </svg>
                                 </div>
-                                <div class="paywall-detail__item-title">Anti-Spam Engine</div>
+                                <div class="paywall-detail__item-title">Malware Scanner Pro</div>
                             </div>
-                            <div class="paywall-detail__item-text">Keep your online space clutter-free with our
-                                Anti-Spam Engine, guarding against unwanted intrusions.
-                            </div>
+                            <div class="paywall-detail__item-text">Detect and eliminate threats with our state-of-the-art Malware Scanner, keeping your WordPress site secure.</div>
+                        </div>
+
+                        <div class="paywall-detail__item">
+                            <a href="https://wpsafezone.com/features" target="_blank">Learn More</a>
                         </div>
 
                     </div>
