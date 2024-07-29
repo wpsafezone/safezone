@@ -1115,7 +1115,7 @@ class Safezone_Admin
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'sz_malware';
-        $wpdb->prepare("DELETE FROM $table_name WHERE status = %d", 1);
+        $wpdb->prepare("DELETE FROM $table_name WHERE status = %d", "1");
     }
 
     public function read_file_content($file_path)
@@ -1555,6 +1555,24 @@ class Safezone_Admin
         }
     }
 
+    private function bad_function_excludes($file_path)
+    {
+        $excludes_folders = [
+            'wp-admin/includes',
+            'wp-includes',
+            'wp-includes/js/plupload/',
+            'wp-includes/js',
+            'wp-includes/js/dist',
+            'wp-includes/js/tinymce'
+        ];
+
+        foreach ($excludes_folders as $folder) {
+            if (str_contains($file_path, $folder)) {
+                return true;
+            }
+        }
+    }
+
     public function bad_functions_check(): void
     {
         $response = wp_remote_get(API_URL . '/plugin/bad-functions');
@@ -1575,12 +1593,12 @@ class Safezone_Admin
                 foreach ($allFiles as $file) {
                     $file_path = str_replace(ABSPATH, '', $file->getPathname());
 
-                    if ($file->isFile() && !$this->is_excluded($file_path)) {
+                    if ($file->isFile() && !$this->is_excluded($file_path) && !$this->bad_function_excludes($file_path)) {
                         $content = $wp_filesystem->get_contents($file->getRealPath());
 
                         if ($content !== false) {
                             foreach ($badFunctions as $badFunction) {
-                                if (str_contains($content, ' ' . $badFunction . '(')) {
+                                if (str_contains($content, ' ' . $badFunction)) {
                                     $activity = 'The <b>' . $badFunction . '</b> function was found in the file: <b>' . esc_html($file->getRealPath()) . '</b>';
                                     $this->insert_malware_scanner_entry($activity, $file->getRealPath(), 'Critical', 6);
                                     break;
