@@ -4,7 +4,7 @@
 **Tags:** security, malware scanner, firewall, brute force, protection
 **Requires at least:** 4.0
 **Tested up to:** 5.9
-**Stable tag:** 0.6.0-beta
+**Stable tag:** 1.0.0
 **License:** GPLv2 or later
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
