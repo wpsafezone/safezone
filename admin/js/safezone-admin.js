@@ -425,11 +425,6 @@
                         return;
                     }
 
-                    if (!safezone.pro && (step === 2 || step === 7)) {
-                        executeStep(step + 1);
-                        return;
-                    }
-
                     if (step === items.length) {
                         $thisButton.prop('disabled', false);
                         $thisButton.removeClass('btn-loading');
@@ -454,7 +449,10 @@
                         } else {
                             $thisButton.prop('disabled', false);
                             $thisButton.removeClass('btn-loading');
+                            executeStep(step + 1);
                         }
+                    }).fail(function (xhr, status, error) {
+                        executeStep(step + 1);
                     });
                 }
 
@@ -975,8 +973,12 @@
                     if (settings.length > 2) {
                         settings_board.html(settings_status_text('error', 'Update Required'));
                         $('.splash-screen').removeClass('show')
-                    } else {
+                    } else if (settings.length > 0 && settings.length < 3) {
                         settings_board.html(settings_status_text('warning', 'Update Required'));
+                        $('.splash-screen').removeClass('show')
+                    } else {
+                        board.html('')
+                        settings_board.html(settings_status_text('success', 'Protected'));
                         $('.splash-screen').removeClass('show')
                     }
                 } else {
