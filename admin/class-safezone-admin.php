@@ -1455,7 +1455,9 @@ class Safezone_Admin
         $excluded_paths = [
             'wp-content/uploads/wordpress',
             'wp-content/plugins/safezone',
-            '.wp-cli'
+            '.wp-cli',
+            '.well-known',
+            '.tmb'
         ];
 
         foreach ($excluded_paths as $excluded) {
