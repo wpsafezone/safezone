@@ -1361,15 +1361,24 @@ class Safezone_Admin
             ]);
 
         } elseif ($request['step'] === "2") {
-            $this->blacklist_ip_check();
-            $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 2));
-            wp_send_json([
-                'success' => true,
-                'message' => 'Malware scan started.',
-                'data' => [
-                    'status' => $control > 0 ? 'failed' : 'success'
-                ]
-            ]);
+            if($this->is_pro){
+                $this->blacklist_ip_check();
+                $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 2));
+                wp_send_json([
+                    'success' => true,
+                    'message' => 'Malware scan started.',
+                    'data' => [
+                        'status' => $control > 0 ? 'failed' : 'success'
+                    ]
+                ]);
+            }else{
+                wp_send_json([
+                    'success' => true,
+                    'message' => 'Only pro!',
+                    'data' => []
+                ]);
+            }
+
         } elseif ($request['step'] === "3") {
             $this->checkImageFiles();
             $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 3));
@@ -1411,18 +1420,26 @@ class Safezone_Admin
                 ]
             ]);
         } elseif ($request['step'] === "7") {
-            $this->blacklisted_usernames_check();
-            $this->delete_directory(ABSPATH . 'wp-content/uploads/wordpress');
-            unlink(ABSPATH . 'wp-content/uploads/wordpress.zip');
-            update_option('sz_autoscanning_date', $this->next_malware_scan);
-            $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 7));
-            wp_send_json([
-                'success' => true,
-                'message' => 'Malware scan started.',
-                'data' => [
-                    'status' => $control > 0 ? 'failed' : 'success'
-                ]
-            ]);
+            if($this->is_pro){
+                $this->blacklisted_usernames_check();
+                $this->delete_directory(ABSPATH . 'wp-content/uploads/wordpress');
+                unlink(ABSPATH . 'wp-content/uploads/wordpress.zip');
+                update_option('sz_autoscanning_date', $this->next_malware_scan);
+                $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 7));
+                wp_send_json([
+                    'success' => true,
+                    'message' => 'Malware scan started.',
+                    'data' => [
+                        'status' => $control > 0 ? 'failed' : 'success'
+                    ]
+                ]);
+            }else{
+                wp_send_json([
+                    'success' => true,
+                    'message' => 'Only pro!',
+                    'data' => []
+                ]);
+            }
         } else {
             wp_send_json([
                 'success' => false,
