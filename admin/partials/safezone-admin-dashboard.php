@@ -15,6 +15,7 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
 ?>
 
 <div class="app">

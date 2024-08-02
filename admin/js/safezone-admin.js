@@ -400,10 +400,10 @@
                 {
                     data: null,
                     render: function (data, type, row) {
-                        if(data.step === "4"){
-                            return '<div class="foundation-table__actions"></div>';
+                        if(data.step === "4" || data.step === "7"){
+                            return '<div class="foundation-table__actions" style="justify-content: flex-start;"><a href="javascript:void(0);" data-id="' + data.id + '" class="text-gray-10 malware-ignore">Ignore</a></div>';
                         }
-                        return '<div class="foundation-table__actions"><a href="javascript:void(0);" data-id="' + data.id + '" class="text-gray-10 malware-ignore">Ignore</a><a href="javascript:void(0);" data-id="' + data.id + '" class="text-blue-50 malware-detail">Details</a></div>';
+                        return '<div class="foundation-table__actions" style="justify-content: flex-start;"><a href="javascript:void(0);" data-id="' + data.id + '" class="text-gray-10 malware-ignore">Ignore</a><a href="javascript:void(0);" data-id="' + data.id + '" class="text-blue-50 malware-detail">Details</a></div>';
                     }
                 },
             ]);
@@ -425,11 +425,6 @@
                         return;
                     }
 
-                    if (step === items.length) {
-                        $thisButton.prop('disabled', false);
-                        $thisButton.removeClass('btn-loading');
-                    }
-
                     items.eq(step - 1).addClass('status-loading');
                     let payload = {action: 'malware_scanner', security: safezone.token, payload: {step: step}};
 
@@ -442,8 +437,13 @@
                                 items.eq(step - 1).addClass('status-bad-result');
                             }
 
-                            malware_table.ajax.reload();
+                            //malware_table.ajax.reload();
                             malware_table.columns.adjust().draw();
+
+                            if (step === items.length) {
+                                $thisButton.prop('disabled', false);
+                                $thisButton.removeClass('btn-loading');
+                            }
 
                             executeStep(step + 1);
                         } else {
