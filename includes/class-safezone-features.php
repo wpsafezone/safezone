@@ -500,41 +500,43 @@ if ( ! class_exists( 'Safezone_Features' ) ) {
 		 * Add Spam Report
 		 *
 		 */
-		private function add_spam_report( $data ): void {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'sz_anti_spams';
+        private function add_spam_report( $data ): void {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'sz_anti_spams';
 
-			$check = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE ip = %s", $table_name, $data["ip"] ) );
-			if ( count( $check ) > 0 ) {
-				return;
-			}
+            $check_query = $wpdb->prepare( "SELECT * FROM {$table_name} WHERE ip = %s", $data["ip"] );
+            $check = $wpdb->get_results( $check_query );
 
-			$wpdb->insert(
-				$table_name,
-				[
-					'ip'           => $data["ip"],
-					'country_code' => $data["country_code"],
-					'country'      => $data["country"],
-					'spam_type'    => $data['spam_type'],
-					'user_agent'   => $data["user_agent"],
-					'activity'     => $data["activity"],
-					'created_at'   => current_time( 'mysql' )
-				],
-				[
-					'%s',
-					'%s',
-					'%s',
-					'%s',
-					'%s',
-					'%s',
-					'%s'
-				]
-			);
+            if ( count( $check ) > 0 ) {
+                return;
+            }
 
-			if ( $wpdb->last_error ) {
-				error_log( 'Database insert error: ' . $wpdb->last_error );
-			}
-		}
+            $wpdb->insert(
+                $table_name,
+                [
+                    'ip'           => $data["ip"],
+                    'country_code' => $data["country_code"],
+                    'country'      => $data["country"],
+                    'spam_type'    => $data['spam_type'],
+                    'user_agent'   => $data["user_agent"],
+                    'activity'     => $data["activity"],
+                    'created_at'   => current_time( 'mysql' )
+                ],
+                [
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%s',
+                    '%s'
+                ]
+            );
+
+            if ( $wpdb->last_error ) {
+                error_log( 'Database insert error: ' . $wpdb->last_error );
+            }
+        }
 
 		/**
 		 *

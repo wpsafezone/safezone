@@ -947,6 +947,7 @@
 
         const bad_bot = $('#bad_bots_count');
         const login_protection = $('#login_protection_count');
+        const last_login_protection = $('#last_login_protection');
 
         const settings_board = $('.setting_status');
         if (board.length) {
@@ -964,6 +965,7 @@
                     blocked_ip.html(response.data?.blocked_ips_count);
                     bad_bot.html(response.data?.bad_bots_count);
                     login_protection.html(response.data?.login_protections_count);
+                    last_login_protection.html(response.data?.last_login_protection);
                     let settings = response.data?.settings.splice(0, 3);
                     let lines = ''
                     settings.map((item) => {
