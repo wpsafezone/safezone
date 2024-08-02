@@ -53,7 +53,7 @@
                                             <div class="settings-form__item-description"><?php echo esc_html($value['description']); ?></div>
                                         </div>
                                         <label class="form-switch">
-                                            <input <?php echo $value['is_pro']  ? 'disabled="disabled"' : ''; ?>
+                                            <input <?php echo $value['is_pro']  ? ($this->is_pro ? '' : 'disabled="disabled"') : ''; ?>
                                                     class="form-check-input update_option"
                                                     data-key="<?php echo esc_attr( $value['key'] ); ?>"
                                                     type="<?php echo esc_attr( $value['type'] ); ?>" role="switch"
