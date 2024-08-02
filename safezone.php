@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              https://brunos.digital
- * @since             1.0.0
+ * @since             1.0.1
  * @package           Safezone
  *
  * @wordpress-plugin

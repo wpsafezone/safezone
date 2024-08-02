@@ -1348,7 +1348,7 @@ class Safezone_Admin
         $table_name = $wpdb->prefix . 'sz_malware';
 
         if ($request['step'] === "1") {
-            $this->malware_table_cleanup();
+            //$this->malware_table_cleanup();
             $this->download_wordpress();
             $this->compare_directories();
             $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 1));
