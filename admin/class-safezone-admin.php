@@ -1049,6 +1049,7 @@ class Safezone_Admin
                 'blocked_spams_count' => (int)$anti_spam_count,
                 'bad_bots_count' => (int)$firewall_bad_bots_count,
                 'login_protections_count' => (int)$login_protection_count,
+                'last_login_protection' => $login_protection_count > 0 ? $wpdb->get_var("SELECT created_at FROM $table_name_anti_spams WHERE spam_type='Login' ORDER BY id DESC LIMIT 1") : 'Never',
                 'settings' => array_values($settings)
             ]
         ]);
