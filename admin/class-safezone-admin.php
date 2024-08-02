@@ -343,7 +343,7 @@ class Safezone_Admin
 
     public function next_malware_scan_date(): string
     {
-        $last_scan = get_option('sz_autoscanning_date');
+        $last_scan = wp_date("Y-m-d H:i");
         if ($last_scan === '') {
             return 'It has not started yet';
         }
@@ -985,7 +985,6 @@ class Safezone_Admin
         // Logları biçimlendirme
         $logs = array_map(function ($log) {
             $log['created_at'] = date('Y-m-d H:i:s', strtotime($log['created_at']));
-            $log['category'] = ucfirst($log['category']);
             return $log;
         }, $logs);
 
@@ -1111,11 +1110,12 @@ class Safezone_Admin
         return $daysArray;
     }
 
-    public function malware_table_cleanup(): void
+    private function malware_table_cleanup(): void
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'sz_malware';
-        $wpdb->prepare("DELETE FROM $table_name WHERE status = %d", "1");
+        $query = $wpdb->prepare("DELETE FROM $table_name WHERE status = %d", 1);
+        $wpdb->query($query);
     }
 
     public function read_file_content($file_path)
@@ -1158,7 +1158,7 @@ class Safezone_Admin
                 WP_Filesystem();
                 global $wp_filesystem;
 
-                if ($wp_filesystem->delete($file_path)) {
+                if ($file_path !== "" && $wp_filesystem->delete($file_path)) {
                     $wpdb->delete($table_name, ['id' => $malware_id], ['%d']);
                     wp_send_json([
                         'success' => true,
@@ -1224,7 +1224,7 @@ class Safezone_Admin
         $table_name = $wpdb->prefix . 'sz_malware';
         $malware_files = $wpdb->get_results("SELECT * FROM $table_name WHERE status = 1", ARRAY_A);
         foreach ($malware_files as $malware_file) {
-            if (!file_exists($malware_file['file_path'])) {
+            if ($malware_file['file_path'] !== '' && !file_exists($malware_file['file_path'])) {
                 $wpdb->delete($table_name, ['id' => $malware_file['id']], ['%d']);
             }
         }
@@ -1340,7 +1340,6 @@ class Safezone_Admin
 
     public function malware_scanner(): void
     {
-        sleep(1);
         $this->ajax_security();
         $request = $this->check_payload();
 
@@ -1422,18 +1421,21 @@ class Safezone_Admin
         } elseif ($request['step'] === "7") {
             if($this->is_pro){
                 $this->blacklisted_usernames_check();
-                $this->delete_directory(ABSPATH . 'wp-content/uploads/wordpress');
-                unlink(ABSPATH . 'wp-content/uploads/wordpress.zip');
                 update_option('sz_autoscanning_date', $this->next_malware_scan);
                 $control = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE status = %d AND step = %d", 1, 7));
+                $this->delete_directory(ABSPATH . 'wp-content/uploads/wordpress');
+                unlink(ABSPATH . 'wp-content/uploads/wordpress.zip');
                 wp_send_json([
                     'success' => true,
-                    'message' => 'Malware scan started.',
+                    'message' => 'Malware scan started.1',
                     'data' => [
-                        'status' => $control > 0 ? 'failed' : 'success'
+                        'status' => $control > 0 ? 'failed' : 'success',
+
                     ]
                 ]);
             }else{
+                $this->delete_directory(ABSPATH . 'wp-content/uploads/wordpress');
+                unlink(ABSPATH . 'wp-content/uploads/wordpress.zip');
                 wp_send_json([
                     'success' => true,
                     'message' => 'Only pro!',
@@ -1454,10 +1456,12 @@ class Safezone_Admin
     {
         $excluded_paths = [
             'wp-content/uploads/wordpress',
-            'wp-content/plugins/safezone',
+            'wp-content/plugins',
             '.wp-cli',
             '.well-known',
-            '.tmb'
+            '.tmb',
+            '.idea',
+            '.DS_Store',
         ];
 
         foreach ($excluded_paths as $excluded) {
@@ -1484,7 +1488,10 @@ class Safezone_Admin
             'error_log',
             '.litespeed_flag',
             'default.php',
-            'favicon.ico'
+            'favicon.ico',
+            '.idea',
+            '.tmb',
+            '.DS_Store',
         ];
 
         $iterator1 = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir1), RecursiveIteratorIterator::SELF_FIRST);
@@ -1537,7 +1544,7 @@ class Safezone_Admin
         }
     }
 
-    public function blacklisted_usernames_check(): void
+    private function blacklisted_usernames_check(): void
     {
         $response = wp_remote_get(API_URL . '/plugin/blacklist-usernames');
         if (!is_wp_error($response)) {
@@ -1547,7 +1554,7 @@ class Safezone_Admin
                 $allUsers = get_users();
                 foreach ($allUsers as $user) {
                     foreach ($blacklistedUsernames as $blacklistedUsername) {
-                        if ($user->user_login === trim($blacklistedUsername['username'])) {
+                        if ($user->user_login === $blacklistedUsername) {
                             $activity = 'A username has been marked as unsafe: <b>' . $user->user_login . '</b>';
                             $this->insert_malware_scanner_entry($activity, '', 'Low', 7);
                         }
@@ -1694,6 +1701,7 @@ class Safezone_Admin
         if (!is_wp_error($response)) {
             $responseData = json_decode(wp_remote_retrieve_body($response), true);
             if ($responseData['success']) {
+
                 foreach ($responseData['data'] as $vulnerability) {
                     if ($vulnerability['cvss_score'] < 4) {
                         $malware_type = 'Low';
@@ -1784,19 +1792,25 @@ class Safezone_Admin
     private function insert_malware_scanner_entry($activity, $file_path, $malware_type, $step): void
     {
         global $wpdb;
-        $table_name = esc_sql($wpdb->prefix . 'sz_malware');
+        $table_name = $wpdb->prefix . 'sz_malware';
 
-        if ($wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$table_name} WHERE file_path = %s AND malware_type = %s AND step = %s", $file_path, $malware_type, $step)) > 0) {
-            // updated_at
-            $wpdb->update(
+        $existing_entry_count = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table_name} WHERE activity = %s AND malware_type = %s AND step = %s",
+            $activity,
+            $malware_type,
+            $step
+        ));
+
+        if ($existing_entry_count > 0) {
+            $update_malware_log = $wpdb->update(
                 $table_name,
                 [
                     'updated_at' => current_time('mysql')
                 ],
                 [
-                    'file_path' => $file_path,
-                    'malware_type' => $malware_type,
-                    'step' => $step
+                    'file_path' => sanitize_text_field($file_path),
+                    'malware_type' => sanitize_text_field($malware_type),
+                    'step' => sanitize_text_field($step)
                 ],
                 [
                     '%s'
@@ -1807,13 +1821,14 @@ class Safezone_Admin
                     '%s'
                 ]
             );
+
         } else {
-            $wpdb->insert(
+            $insert_malware_log = $wpdb->insert(
                 $table_name,
                 [
-                    'file_path' => sanitize_text_field($file_path),
+                    'file_path' => $file_path ? sanitize_text_field($file_path) : '',
                     'malware_type' => sanitize_text_field($malware_type),
-                    'step' => $step,
+                    'step' => sanitize_text_field($step),
                     'activity' => $activity,
                     'created_at' => current_time('mysql'),
                     'updated_at' => current_time('mysql')
@@ -1823,13 +1838,10 @@ class Safezone_Admin
                     '%s',
                     '%s',
                     '%s',
+                    '%s',
                     '%s'
                 ]
             );
-
-            if ($wpdb->last_error) {
-                error_log('Database insert error: ' . $wpdb->last_error);
-            }
         }
     }
 
