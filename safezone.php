@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://brunos.digital
- * @since             1.0.1
+ * @since             1.0.0
  * @package           Safezone
  *
  * @wordpress-plugin
  * Plugin Name:       Safe Zone
  * Plugin URI:        https://wpsafezone.com
  * Description:       Safe Zone protects your WordPress site against malware and attacks using advanced AI technology. With real-time protection, an advanced firewall, and AI-powered malware scanning, it keeps your site secure. Easy to install and user-friendly, safeguarding your site has never been simpler!
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Safe Zone
  * Author URI:        https://wpsafezone.com
  * Tags:              security, malware scanner, firewall, brute force, protection, security plugin, security scan, security scanner, security scan plugin, security scan tool, security scan wordpress, security scan wp, security scanner plugin, security scanner tool, security scanner wordpress, security scanner wp, security tool, security wordpress, security wp, site security, website security, wordpress security, wp security
